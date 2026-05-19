@@ -1,0 +1,25 @@
+from ultralytics import YOLO
+
+
+model = YOLO("/home/s190752/projektGrupowy4/results_v8s/v8s-lane-seg/weights/best.pt")
+
+if __name__ == '__main__':
+    metrics = model.val(
+        data="/home/s190752/projektGrupowy4/dataset/bdd100k_lane_seg.yaml",
+        imgsz=1024,
+        batch=4,
+        device=2,
+        split='val',
+        plots=True,
+        boxes=False,
+    )
+
+    print(f"\n{'='*50}")
+    print(f"  WYNIKI EWALUACJI — YOLOv8s-seg")
+    print(f"{'='*50}")
+    print(f"  mAP50-95 (seg):  {metrics.seg.map:.4f}")
+    print(f"  mAP50    (seg):  {metrics.seg.map50:.4f}")
+    print(f"  mAP75    (seg):  {metrics.seg.map75:.4f}")
+    print(f"  Precision:       {metrics.seg.mp:.4f}")
+    print(f"  Recall:          {metrics.seg.mr:.4f}")
+    print(f"{'='*50}")

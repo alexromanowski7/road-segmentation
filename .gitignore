@@ -1,0 +1,10 @@
+# Foldery
+dataset/
+runs/
+__pycache__/
+
+# Wagi modeli
+*.pt
+
+# Pliki logów
+*log*.txt

@@ -1,0 +1,19 @@
+from ultralytics import YOLO
+
+model = YOLO("/home/s190752/projektGrupowy4/runs/segment/results_v8s/v8s-lane-seg-6/weights/best.pt")
+
+if __name__ == '__main__':
+    results = model.predict(
+        source="/home/s190752/projektGrupowy4/dataset/images/val",
+        imgsz=1024,
+        device=2,
+        save=True,
+        boxes=False,
+        conf=0.25,              
+        iou=0.45,              
+        max_det=100,           
+        project="results_v8s",
+        name="v8s-lane-seg-predict",
+    )
+
+    print(f"\nPredykcje zapisane. Przetworzono {len(results)} obrazow.")

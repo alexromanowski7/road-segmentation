@@ -1,0 +1,39 @@
+from ultralytics import YOLO
+import torch
+
+print(f"CUDA available: {torch.cuda.is_available()}")
+if torch.cuda.is_available():
+    print(f"GPU: {torch.cuda.get_device_name()}")
+
+model = YOLO("yolov8s-seg.pt")
+
+if __name__ == '__main__':
+    results = model.train(
+        data="/home/s190752/projektGrupowy4/dataset/bdd100k_lane_seg.yaml",
+        epochs=150,
+        patience=50,
+        imgsz=1024,
+        batch=16,
+        cache="ram",
+        workers=8,
+        device=0,
+        optimizer="AdamW",
+        lr0=0.001,
+        lrf=0.01,
+        warmup_epochs=5,
+        cos_lr=True,
+        close_mosaic=20,
+        amp=True,
+        copy_paste=0.1,
+        mixup=0.1,
+        degrees=10.0,
+        scale=0.7,
+        fliplr=0.5,
+        label_smoothing=0.01,
+        project="results_v8s",
+        name="v8s-lane-seg",
+        save=True,
+        save_period=25,
+        plots=True,
+        verbose=True,
+    )
